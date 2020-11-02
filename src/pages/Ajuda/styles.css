@@ -1,0 +1,55 @@
+.help-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.help-form-header{
+    background-color: rgba(253, 93, 73, 0.8);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 26px;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+}
+
+.help-form-body{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(253, 125, 109, 0.7);
+    padding: 20px;
+    margin-bottom: 26px;
+    border-radius: 0 0 20px 20px;
+}
+
+.help-form-body label {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.help-form-body input, select {
+    color: rgba(251, 139, 125, 1);
+    border-width: 0;
+    height: 35px;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.help-form-body input {
+   margin-bottom: 10px;
+}
+
+.help-form-comfirm-button {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(253, 123, 107, 1);
+    border-width: 0;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+.help-form-comfirm-button:hover {
+    cursor: pointer;
+}

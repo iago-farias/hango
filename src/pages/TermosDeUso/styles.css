@@ -1,0 +1,26 @@
+.header{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color:rgba(253, 93, 73, 1);
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.terms-container {
+    background-color: rgba(253, 93, 73, 0.7);
+    margin: 10px auto;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    width: 75%;
+}
+
+@media (max-width: 678px){
+    .header {
+        font-size: 26px;
+    }
+}

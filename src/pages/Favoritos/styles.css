@@ -1,0 +1,60 @@
+
+.favoritos-container{
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    column-gap: 100px;
+    row-gap: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-favorito {
+    background-color: rgba(253, 94, 73, 0.80);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.image-container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+    align-self: center;
+    margin-right: 15px;
+}
+
+.star-icon:hover{
+    cursor: pointer;
+    height: 30px;
+}
+
+.nome-estabelecimento {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+@media (max-width: 950px){
+    .favoritos-container{
+        grid-template-columns: repeat(2, 315px);
+    }
+
+} 
+@media (max-width: 678px){
+    .favoritos-container{
+        grid-template-columns: 1fr;
+    }
+
+} 

@@ -1,0 +1,110 @@
+
+.header-bar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    border-bottom: solid #cccccc 2px;
+    padding: 0 10px;
+    background-color: #ffffff;
+}
+
+.header-logo{
+    width: 130px;
+    height: 100px;
+    margin: 0 75px;
+}
+
+.menu-icon{
+    font-size: 45px;
+    color: rgba(253, 93, 73, 0.9);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.header-drawer{
+    display: flex;
+    width: 100%;
+    background-color: rgba(253, 93, 73, 0.9);
+    padding: 10px 14px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-drawer .user-name {
+    font-size: 18px;
+    color: #ffffff;
+    margin-right: 14px;
+}
+
+.menu {
+    margin-top: 22px;
+}
+
+.menu-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: rgba(253, 93, 73, 0.9);
+    font-size: 22px;
+    box-sizing: border-box;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 90vh;
+}
+
+.restaurant-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurant-info-container-header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(253, 93, 73, 0.9);
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-radius: 15px 15px 0 0;
+    padding: 6px;
+}
+
+.restaurant-info-container-body {
+    color: rgba(253, 93, 73, 0.8);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.restaurant-info-container-body div {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+}
+
+#button-ok {
+    background-color: #379000;
+    color: #ffffff;
+    font-size: 16px;
+    border-width: 0;
+    border-radius: 15px;
+    padding: 6px;
+    width: 200px;
+}
+
+#button-ok:hover {
+    cursor: pointer;
+}
