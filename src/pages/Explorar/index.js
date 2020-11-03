@@ -101,7 +101,7 @@ function Explorar(){
                         <div 
                         className="menu-item"
                         >
-                            <StarOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)'}} />
+                            <StarOutlined className="drawer-menu-icon" />
                             Favoritos
                         </div>
                     </Link>
@@ -109,7 +109,7 @@ function Explorar(){
                         <div 
                         className="menu-item"
                         >
-                            <QuestionCircleOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)'}} />
+                            <QuestionCircleOutlined className="drawer-menu-icon" />
                             Ajuda e contato
                         </div>
                     </Link>
@@ -117,7 +117,7 @@ function Explorar(){
                         <div 
                         className="menu-item"
                         >
-                            <FileProtectOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)'}} />
+                            <FileProtectOutlined className="drawer-menu-icon" />
                             Termos de uso
                         </div>
                     </Link>
@@ -127,6 +127,7 @@ function Explorar(){
                         <Link to="/">
                             <div 
                             className="menu-item"
+                            style={{justifyContent:'center'}}
                             >
                                 Sair
                             </div>
