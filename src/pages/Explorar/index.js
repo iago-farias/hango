@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Layout, Drawer } from 'antd';
 import 
 {
@@ -13,6 +13,7 @@ from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import { Map, Marker, TileLayer, Popup} from 'react-leaflet';
 import Leaflet from 'leaflet';
+import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
 import thumbImage from '../../assets/thumbImage.svg';
@@ -22,7 +23,15 @@ import './styles.css';
 
 function Explorar(){
     const [drawerIsVisible, setDrawerIsVisible] = useState(false);
-    const [position, setPosition] = useState([-15.8171136, -48.054272]);
+    const [position, setPosition] = useState([-15.8354694, -48.0297131]);
+    const [restaurants, setRestaurants] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://my-json-server.typicode.com/mateusmsc/api_rest_fake_hango/restaurants")
+            .then(response => {
+                setRestaurants(response.data);
+            });
+    },[]);
 
     return(
         <Layout>
@@ -38,45 +47,52 @@ function Explorar(){
                         center={position}
                         zoom={15}
                     >
-                    <TileLayer
-                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker 
-                        position={position}
-                        icon={
-                            Leaflet.icon({
-                                iconUrl:pin,
-                                iconSize:[35,35]
-                            })
+                        <TileLayer
+                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {
+                            restaurants.map(restaurant => (
+                                <Marker
+                                    key={restaurant.id}
+                                    position={[restaurant.coordinates.latitude, restaurant.coordinates.longitude]}
+                                    icon={
+                                        Leaflet.icon({
+                                            iconUrl:pin,
+                                            iconSize:[35,35]
+                                        })
+                                    }
+                                >
+                                <Popup
+                                    closeButton={false}
+                                >
+                                    <div className="restaurant-info-container">
+                                    <div className="restaurant-info-container-header">
+                                       {restaurant.name}
+
+                                        <StarOutlined style={{fontSize:'25px', color:'#fff'}} />
+                                    </div>
+
+                                    <div className="restaurant-info-container-body">
+                                        <div>
+                                            <ClockCircleOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)', marginRight:'10px'}}/>
+                                             8:00 às 22:00
+                                        </div>
+                                        <div>
+                                            <PhoneOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)', marginRight:'10px'}}/> 
+                                            (61) 9999-9999
+                                        </div>
+                                        <div>
+                                            Lotação de pessoas <br/> aproximada: {restaurant.capacity}/45
+                                        </div>
+
+                                        <button id="button-ok">Realizar reserva</button>
+                                    </div>
+                                    </div>
+                                </Popup>
+                            </Marker>
+                            ))
                         }
-                    >
-                        <Popup
-                            closeButton={false}
-                        >
-                            <div className="restaurant-info-container">
-                                <div className="restaurant-info-container-header">
-                                    Toretto
-
-                                    <StarOutlined style={{fontSize:'25px', color:'#fff'}} />
-                                </div>
-
-                                <div className="restaurant-info-container-body">
-                                    <div>
-                                        <ClockCircleOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)', marginRight:'10px'}}/> 8:00 às 22:00
-                                    </div>
-                                    <div>
-                                        <PhoneOutlined style={{fontSize:'30px', color:'rgba(253, 93, 73, 0.8)', marginRight:'10px'}}/> (61) 9999-9999
-                                    </div>
-                                    <div>
-                                       Lotação de pessoas <br/> aproximada: 7/45
-                                    </div>
-
-                                    <button id="button-ok">Realizar reserva</button>
-                                </div>
-                            </div>
-                        </Popup>
-                    </Marker>
                     </Map>
                 </div>
 
@@ -90,11 +106,13 @@ function Explorar(){
             >
                 <img style={{width:'150px', height:'100px'}} src={logo} alt="logo"/>
 
-                <div className='header-drawer'>
-                    <img style={{width:50, height:50}} src={thumbImage} alt=""/>
+                <Link to="/perfil">
+                    <div className='header-drawer'>
+                        <img className="profile-thumb-image" src={thumbImage} alt=""/>
 
-                    <p className="user-name">Leandro Vaguetti</p>
-                </div>
+                        <p className="user-name">Leandro Vaguetti</p>
+                    </div>
+                </Link>
 
                 <div className="menu">
                     <Link to="/favoritos">

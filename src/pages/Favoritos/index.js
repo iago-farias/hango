@@ -1,12 +1,49 @@
-import React from 'react';
-import { Layout } from 'antd';
-import {LeftCircleOutlined, StarFilled, FileImageOutlined} from '@ant-design/icons';
+import React,{useEffect, useState} from 'react';
+import { Layout, Modal, Spin } from 'antd';
+import {LeftCircleOutlined, StarFilled, FileImageOutlined, LoadingOutlined} from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 import './styles.css';
 
+const spinIcon = (
+<LoadingOutlined
+    style={{ fontSize: 50, color: "rgba(251, 139, 125, 1)" }}
+    spin
+/>);
+
 function Favoritos(){
+    const [favorites, setFavorites] = useState([]);
+    const [modalIsVisible, setModalIsVisible] = useState(false);
+    const [selectedFavorite, setSelectedFavorite] = useState(-1);
+    const [contentIsLoaded, setContentIsLoaded] = useState(false);
+
     const history = useHistory();
+
+    useEffect(() => {
+        axios.get("https://my-json-server.typicode.com/mateusmsc/api_rest_fake_hango/restaurants")
+            .then(response => {
+                setFavorites(response.data);
+                setContentIsLoaded(true);
+        });
+    }, []);
+
+    function removeFavorite(){
+
+        favorites.splice(selectedFavorite, 1);
+    
+        const newFavorites = favorites;
+    
+        setFavorites(newFavorites);
+    
+        setModalIsVisible(false);
+    }
+
+    function handleModalClose(){
+        setSelectedFavorite(-1);
+
+        setModalIsVisible(false);
+    }
 
     return(
         <Layout>
@@ -21,87 +58,69 @@ function Favoritos(){
             <Layout.Content
                 style={{backgroundColor:'#fff', padding: "0 10px"}}
             >
-               <div className="favoritos-container">
-                    <div 
-                        className="card-favorito" 
-                    >
-                    <div className="image-container">
-                     <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
+                <Modal
+                    visible={modalIsVisible}
+                    onCancel={() => handleModalClose()}
+                    closable={false}
+                    footer={null}
+                    centered={true}
+                    bodyStyle={{padding:"0 0 10px 0", fontSize:18, textAlign:'center', fontWeight:'bold'}}
+                    width={400}
+                >
+                    <div className="modal-header">Confirmação</div>
+                    <div>Deseja remover o estabelecimento do seus favoritos ?</div>
+                    <div className="modal-footer">
+                        <button 
+                            className="modal-button" 
+                            style={{backgroundColor:"rgba(7,7,7,0.47)"}} 
+                            onClick={() => handleModalClose()}
+                        >
+                            Não
+                        </button>
+                        <button 
+                            className="modal-button" 
+                            style={{backgroundColor:"rgba(53,120,229,0.74)"}} 
+                            onClick={() => removeFavorite()}
+                        >
+                            Sim
+                        </button>
                     </div>
-
-                    <div style={{width: '10rem'}}>
-                        <p className="nome-estabelecimento">{"Giraffas"}</p>
-                        <p>Lotação de pessoas aproximadas: {"15"}</p>
+                </Modal>
+                {
+                    contentIsLoaded ?  
+                    <div className="favoritos-container">
+                    {
+                        favorites.map((favorite, index) => (
+                            <div 
+                                className="card-favorito"
+                                key={favorite.id}
+                            >
+                                <div className="image-container">
+                                    <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
+                                </div>
+    
+                                <div style={{width: '10rem'}}>
+                                    <p className="nome-estabelecimento">{favorite.name}</p>
+                                    <p>Lotação de pessoas aproximadas: {favorite.capacity}</p>
+                                </div>
+    
+                                <StarFilled 
+                                    style={{fontSize:'30px', cursor:'pointer'}}
+                                    onClick={() => {
+                                        setModalIsVisible(true);
+                                        setSelectedFavorite(index);
+                                    }}
+                                />
+    
+                            </div>
+                        ))
+                    } 
                     </div>
-
-                     <StarFilled style={{fontSize:'30px'}} />
-
+                    :
+                    <div style={{display:"flex", alignItems:'center', justifyContent:'center', height:'500px'}}>
+                        <Spin indicator={spinIcon} />
                     </div>
-                    <div 
-                        className="card-favorito" 
-                    >
-                    <div className="image-container">
-                     <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
-                    </div>
-
-                    <div style={{width: '10rem'}}>
-                        <p className="nome-estabelecimento">{"Giraffas"}</p>
-                        <p>Lotação de pessoas aproximadas: {"15"}</p>
-                    </div>
-
-                     <StarFilled style={{fontSize:'30px'}} />
-
-                    </div>
-                    <div 
-                        className="card-favorito" 
-                    >
-                    <div className="image-container">
-                     <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
-                    </div>
-
-                    <div style={{width: '10rem'}}>
-                        <p className="nome-estabelecimento">{"Giraffas"}</p>
-                        <p>Lotação de pessoas aproximadas: {"15"}</p>
-                    </div>
-
-                     <StarFilled style={{fontSize:'30px'}} />
-
-                    </div>
-                    <div 
-                        className="card-favorito" 
-                    >
-                    <div className="image-container">
-                     <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
-                    </div>
-
-                    <div style={{width: '10rem'}}>
-                        <p className="nome-estabelecimento">{"Giraffas"}</p>
-                        <p>Lotação de pessoas aproximadas: {"15"}</p>
-                    </div>
-
-                     <StarFilled style={{fontSize:'30px'}} />
-
-                    </div>
-                    <div 
-                        className="card-favorito" 
-                    >
-                    <div className="image-container">
-                     <FileImageOutlined style={{fontSize:'30px', color:"rgba(253, 93, 73, 1)"}} />
-                    </div>
-
-                    <div style={{width: '10rem'}}>
-                        <p className="nome-estabelecimento">{"Giraffas"}</p>
-                        <p>Lotação de pessoas aproximadas: {"15"}</p>
-                    </div>
-
-                     <StarFilled 
-                        style={{fontSize:'30px'}}
-                        className="star-icon" 
-                     />
-
-                    </div>
-               </div>
-                    
+                }                    
             </Layout.Content>
         </Layout>
     );
