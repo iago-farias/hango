@@ -8,6 +8,10 @@ App disponível em: https://pwa-hango.herokuapp.com/
 
 ## Captura de Tela
 
+<p align="center">
+  <img alt="screen grab of netflix clone" src=".gh-assets/captura.gif"/>
+</p>
+
 ## Componentes/Bibliotecas Utilizadas
 
 - antd
